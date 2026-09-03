@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: invoicer-api
+
+  config:
+    import: optional:file:.env[.properties]
+
+  # Database connection configuration.
+  datasource:
+    url: jdbc:postgresql://localhost:${DB_PORT:5432}/${DB_NAME:invoicer_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres_password_change_me}
+    driver-class-name: org.postgresql.Driver
+
+  # JPA / Hibernate configuration.
+  jpa:
+    hibernate:
+      # "update" lets Hibernate update the schema from Java entities during local development.
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
